@@ -11,10 +11,12 @@
     <div class="container">
         <h1>Generate a <span>random password</span></h1>
         <p>Never use an insecure password again.</p>
+        <input id="passLength" type="text" placeholder="Input password length (8-16)">
+        <p id="message"></p>
         <button onclick="generatePass()">Generate passwords</button>
         <div class="passwords">
-            <input type="text" id="password1" readonly>
-            <input type="text" id="password2" readonly>
+            <input type="text" onclick="copy()" class="passwordEl" id="password1" readonly>
+            <input type="text" onclick="copy()" class="passwordEl" id="password2" readonly>
         </div>
     </div>
     <script src="script.js"></script>
