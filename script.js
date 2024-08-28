@@ -4,19 +4,19 @@ const characters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"
 let password1 = document.getElementById("password1");
 let password2 = document.getElementById("password2");
 let passLength = document.getElementById("passLength");
-let errorMessage = document.getElementById("message");
+let Message = document.getElementById("message");
 
 
 function generatePass() {
   password1.value = '';
   password2.value = '';
   const passLengthValue = parseInt(passLength.value);
-  errorMessage.textContent = '';
+  Message.textContent = '';
 
   if( passLengthValue > 16 || passLengthValue < 8 ) {
-    errorMessage.textContent = 'Enter number from 8-16';
+    showMessage('Enter a number from 8-16', 'error');
   } else if ( isNaN(passLengthValue) ) {
-    errorMessage.textContent = 'This is not a number';
+    showMessage('This is not a number', 'error');
   } else {
       for( let i = 0; i < passLength.value; i++ ){
         let pass1Index = Math.floor(Math.random() * characters.length);
@@ -24,10 +24,41 @@ function generatePass() {
         
         password1.value += characters[pass1Index];
         password2.value += characters[pass2Index];
+        showMessage('Passwords generated successfully', 'success');
       }
   }
   passLength.value = '';
 }
 
+function copyToClipboard(event) {
+  const element = event.target; // Get the element that triggered the event
 
+  if( !element.value ) {
+    showMessage('The field is empty', 'error');
+    return;
+  }
 
+  element.select(); // Select the text in the input field
+  element.setSelectionRange(0, 99999); // For mobile devices
+  
+  navigator.clipboard.writeText(element.value)
+  .then(() => showMessage('Password copied to clipboard', 'success'))
+  .catch(err => showMessage('Failed to copy text', 'error'));
+}
+
+function showMessage(text, type) {
+  message.textContent = text;
+  message.className = type; // Apply success or error styling
+  message.style.opacity = '1';
+  message.style.transform = 'translateY(0)';
+  setTimeout(() => {
+      message.style.opacity = '0';
+      message.textContent = '';
+      message.style.transform = 'translateY(-10px)';
+  }, 3000);
+}
+
+// Add event listeners to the password input fields using class selector
+document.querySelectorAll('.passwordEl').forEach(input => {
+  input.addEventListener('click', copyToClipboard);
+});
