@@ -41,6 +41,7 @@ button {
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 20px;
+  min-width: 60%;
   transition: background-color 0.3s;
 }
 
@@ -65,3 +66,37 @@ button:hover {
   margin: 5px 10px;
 }
 
+#passLength{
+  background-color: #1a1c22;
+  border: 1px solid #21c97e;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  min-width: 55%;
+  text-align: center;
+  font-size: 14px;
+  margin: 5px 10px;
+}
+
+#message{
+  color: red;
+  margin: 0;
+  margin-bottom: 2px;
+  font-size: small;
+  transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+#message.success {
+  color: green;
+}
+
+/* Error message style */
+#message.error {
+  color: red;
+}
+
+.passwordEl:hover{
+  cursor: pointer;
+}
